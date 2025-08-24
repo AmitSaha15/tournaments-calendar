@@ -1,50 +1,152 @@
-# Welcome to your Expo app 👋
+# Sports Tournament Calendar App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A React Native app built with Expo that displays sports tournaments in an interactive calendar and card view. Users can filter by sports, view tournament details, and explore match fixtures.
 
-## Get started
+## Demo Video
+[Demo Video Link](https://drive.google.com/file/d/1Bm7-nJ4fOUILzuL2Gk9mQjQSQKzsdkds/view?usp=drivesdk)
 
-1. Install dependencies
+## Apk Link
+[EAS build Apk link](https://expo.dev/artifacts/eas/wSUbYpXj4y12Jpb6dpZJKE.apk)
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+✅ **Sports Filter Dropdown**
+- Fetches sports from StapuBox API
+- Default: "All Sports" selected
+- Dynamic filtering of calendar highlights and tournaments
 
-   ```bash
-   npx expo start
-   ```
+✅ **Interactive Calendar**
+- Month view navigation
+- Highlights tournament start dates only
+- Tap highlighted dates to filter tournaments
 
-In the output, you'll find options to open the app in a
+✅ **Tournament Cards**
+- Outer cards display: logo, name, sport, level, date
+- Inner cards show expandable match fixtures
+- Automatic expand/collapse functionality
+- No expand icon when no fixtures available
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+✅ **Time Zone Support**
+- All dates/times displayed in IST (Indian Standard Time)
+- Proper parsing of API date/time formats
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+✅ **Enhanced UX Features**
+- Skeleton loaders during data fetch
+- Pull-to-refresh functionality
+- Offline caching with AsyncStorage
+- Error handling and retry mechanisms
+- Empty states and loading indicators
 
-## Get a fresh project
+## Setup Instructions
 
-When you're ready, run:
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+- Expo CLI (`npm install -g @expo/cli`)
 
+### Installation
+
+1. **Clone the repository**
 ```bash
-npm run reset-project
+git clone <your-repo-url>
+cd tournaments-calendar
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. **Install dependencies**
+```bash
+npm install
+```
 
-## Learn more
+3. **Start the development server**
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+4. **Run on device/simulator**
+- Scan QR code with Expo Go app (iOS/Android)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
+### Building APK
 
-Join our community of developers creating universal apps.
+1. **Install EAS CLI**
+```bash
+npm install -g eas-cli
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+2. **Configure EAS**
+```bash
+eas login
+eas build:configure
+```
+
+3. **Build APK**
+```bash
+eas build --platform android --profile preview
+```
+
+## API Integration
+
+### Sports API
+- **Endpoint**: `https://stapubox.com/sportslist`
+- **Fallback**: Mock data for badminton and football
+
+### Tournaments API  
+- **Endpoint**: `https://stapubox.com/tournament/demo`
+- **Fallback**: Mock tournament data with sample fixtures
+
+## Technical Decisions
+
+### Architecture
+- **Modular Components**: Separated concerns with dedicated components
+- **TypeScript**: Full type safety throughout the app
+- **Custom Hooks**: Efficient data management and caching
+
+### State Management
+- React hooks for local state
+- AsyncStorage for offline persistence
+- Optimistic UI updates with fallbacks
+
+### Performance Optimizations
+- FlatList for efficient rendering
+- Memoized computations for filtered data
+- Skeleton loaders for perceived performance
+- Lazy loading and caching strategies
+
+### Error Handling
+- Network error recovery
+- Graceful degradation with mock data
+- User-friendly error messages
+
+
+## Key Components
+
+### SportsDropdown
+- Fetches and displays sports options
+- Handles selection changes
+- Includes loading states
+
+### CalendarComponent  
+- Custom month navigation
+- Highlights tournament start dates
+- Handles date selection events
+
+### TournamentCard
+- Displays tournament information
+- Expandable fixture details
+- Conditional expand icon display
+
+### SkeletonLoader
+- Animated loading placeholders
+- Improves perceived performance
+- Matches actual content layout
+
+## Dependencies
+
+- **React Native**: Core framework
+- **Expo**: Development platform
+- **TypeScript**: Type safety
+- **react-native-calendars**: Calendar component
+- **AsyncStorage**: Local data persistence
+- **axios**: HTTP client
+- **moment**: Date manipulation
+- **react-native-picker-select**: Dropdown component
